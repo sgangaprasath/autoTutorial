@@ -25,7 +25,7 @@
        F(1)=Wp
        F(2)=Wpp
        F(3)=Wppp
-       F(4)=W + lam*W + 0.001*PAR(1)*SIN(S)
+       F(4)=W + lam*W + PAR(1)*SIN(2*PI*S)
        F(5)=1
 
       END SUBROUTINE FUNC
