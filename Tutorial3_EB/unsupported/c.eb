@@ -1,0 +1,11 @@
+unames = {1:'W', 2:'Wp', 3:'Wpp', 4:'Wppp'}
+parnames = {1: 'omega', 2: 'lam'}
+NDIM=   5, IPS =   4, IRS =   0, ILP =   1
+ICP =  ['lam','omega']
+NTST=  200, NCOL=   4, IAD =   3, ISP =   2, ISW = 1, IPLT= 0, NBC= 5, NINT= 0
+NMX=  5000, NPR=  20, MXBF=  10, IID =   2, ITMX= 8, ITNW= 5, NWTN= 3, JAC= 0
+EPSL= 1e-06, EPSU = 1e-06, EPSS =0.0001
+DS  =  0.001, DSMIN= 0.001, DSMAX=   0.005, IADS=  1
+NPAR = 2, THL =  {}, THU =  {}
+UZR = {'lam': [1.0e-4]}
+UZSTOP = {'lam': -0.1}

@@ -1,0 +1,23 @@
+#=================
+# AUTO Demo fvk
+#=================
+
+# Load the files fvk.f90 and c.fvk into the AUTO
+fvk = load('fvk')
+
+# Run and store the result in the Python variable mu
+mu = run(fvk,ICP=[1,4,3])
+
+mu = mu+run(mu('BP1'),ISW=-1,DS='-',UZSTOP={'lambda':0.5})
+mu2 = run(mu('UZ2'),ISW=1,ICP=['fvK','lambda'],DS=0.01,
+    UZSTOP={'lambda':1.0,'fvK':5500.0}, UZR={'lambda':0.5})
+
+# Relabel solutions
+mu2 = relabel(mu2)
+# Save to b.mu, s.mu, and d.mu
+save(mu2,'mu2')
+# Plot bifurcation diagram
+p = plot(mu2)
+#clean the directory
+clean()
+wait()

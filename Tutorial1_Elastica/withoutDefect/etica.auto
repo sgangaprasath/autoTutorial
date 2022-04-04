@@ -1,0 +1,27 @@
+#=================
+# AUTO Demo etica
+#=================
+
+# Load the files etica.f90 and c.etica into the AUTO
+# command interpreter.
+etica = load('etica')
+# Run and store the result in the Python variable mu
+mu = run(etica)
+# Run backwards, and append to mu
+mu = mu + run(mu,DS='-')
+mu = mu + run(mu('BP1'),ISW=-1)
+mu = mu + run(mu('BP1'),DS='-',ISW=-1)
+mu = mu + run(mu('BP2'),ISW=-1)
+mu = mu + run(mu('BP2'),DS='-',ISW=-1)
+mu = mu + run(mu('BP3'),ISW=-1)
+mu = mu + run(mu('BP3'),DS='-',ISW=-1)
+# Relabel solutions
+mu = relabel(mu)
+# Save to b.mu, s.mu, and d.mu
+save(mu,'mu')
+# Plot bifurcation diagram
+p = plot(mu)
+p.config(bifurcation_y=['psi(1)'])
+#clean the directory
+#clean()
+wait()

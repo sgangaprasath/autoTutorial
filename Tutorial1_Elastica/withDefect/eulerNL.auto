@@ -1,0 +1,25 @@
+#=================
+# AUTO Demo eulerNL
+#=================
+
+# Load the files eulerNL.f90 and c.eulerNL into the AUTO
+# command interpreter.
+eulerNL = load('eulerNL')
+# Run and store the result in the Python variable mu
+mu = run(eulerNL)
+# Run backwards, and append to mu
+mu = mu + run(mu,DS='-')
+eNL2 = load(e='eNL2',c='eulerNL')
+mu2 = run(eNL2,DS='-')
+mu2 = mu2 + run(eNL2)
+mu = mu2 + mu
+# Relabel solutions
+mu = relabel(mu)
+# Save to b.mu, s.mu, and d.mu
+save(mu,'mu')
+# Plot bifurcation diagram
+p = plot(mu)
+p.config(bifurcation_y=['th'])
+#clean the directory
+clean()
+wait()

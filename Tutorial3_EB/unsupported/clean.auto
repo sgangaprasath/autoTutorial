@@ -1,0 +1,9 @@
+#================
+# AUTO Euler-Beam
+#================
+
+print "\n***Clean the directory***"
+
+delete("eb")
+delete("mu")
+clean()
