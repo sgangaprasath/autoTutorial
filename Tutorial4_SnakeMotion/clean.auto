@@ -1,0 +1,5 @@
+print "\n***Clean the directory***"
+
+delete("Snake")
+delete("mu")
+clean()

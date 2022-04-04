@@ -1,0 +1,34 @@
+#=================
+# AUTO eulerNL
+#=================
+
+Snake = load('Snake')
+
+# Varying Mo
+mu1 = run(Snake)
+
+# Varying lambda
+mu1 = mu1 + run(mu1('UZ1'),DS='-',ICP=[7],UZSTOP={7:5.0e-3})
+
+# Varying Pr
+mu1 = mu1 + run(mu1('UZ2'),ICP=[1],UZSTOP={1:0.18})
+
+# Varying muw
+mu1 = mu1 + run(mu1('UZ3'),ICP=[5],UZSTOP={5:0.2})
+
+# Varying Vi
+mu1 = mu1 + run(mu1('UZ4'),ICP=[4],UZSTOP={4:0.1})
+
+# Varying boundary theta
+mu1 = mu1 + run(mu1('UZ5'),c='Snake.1',e='SnakeFull',ICP=[8, 2],UZSTOP={8:1.0e-3})
+
+#
+# Relabel solutions
+mu = relabel(mu1)
+# Save to b.mu, s.mu, and d.mu
+save(mu,'mu')
+# Plot bifurcation diagram
+p = plot(mu1)
+#clean the directory
+#clean()
+wait()
