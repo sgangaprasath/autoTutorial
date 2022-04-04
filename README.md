@@ -12,6 +12,8 @@ We begin by introducing the framework [here](./autoFw.html). Please click this l
 
 * [Buckling of a sheet](https://sgangaprasath.github.io/fvk.html) - two parameter continuation
 
-* Oscillating beam - eigen-value problem
+* Oscillating beam - eigen-value problem, homotopy continuation
+
+* Undulatory locomotion on land - periodic solution, homotopy continuation
 
 ![Tutorial Cover](./figs/cover.jpeg)
