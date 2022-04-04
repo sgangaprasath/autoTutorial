@@ -13,19 +13,19 @@
       DOUBLE PRECISION, INTENT(INOUT) :: DFDU(NDIM,NDIM), DFDP(NDIM,*)
 
       REAL(8), PARAMETER :: PI = 4 * atan(1.0)
-      DOUBLE PRECISION W, Wp, Wpp, Wppp, S, lam, omega
+      DOUBLE PRECISION W, Wp, Wpp, Wppp, S, lam, beta
 
        W=U(1)
        Wp=U(2)
        Wpp=U(3)
        Wppp=U(4)
        S=U(5)
-       omega=PAR(1)
+       beta=PAR(1)
        lam=PAR(2)
        F(1)=Wp
        F(2)=Wpp
        F(3)=Wppp
-       F(4)=W + lam*W + PAR(1)*SIN(2*PI*S)
+       F(4)=W-lam*W+beta*SIN(2*PI*S)
        F(5)=1
 
       END SUBROUTINE FUNC
