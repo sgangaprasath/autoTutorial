@@ -1,6 +1,6 @@
-# MacDown
+# Elastic instabilities using *auto-07p* - A tutorial series
 
-![MacDown logo](http://macdown.uranusjr.com/static/images/logo-160.png)
+![MacDown logo](./figs/cover.jpeg)
 
 Hello there! I’m **MacDown**, the open source Markdown editor for OS X.
 
