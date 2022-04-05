@@ -12,8 +12,10 @@ We begin by introducing the framework [here](./autoFw.html). Please click this l
 
 * [Buckling of a sheet](https://sgangaprasath.github.io/fvk.html) - two parameter continuation
 
-* Oscillating beam - eigen-value problem, homotopy continuation
+* [Oscillating beam](https://sgangaprasath.github.io/oscillating.html) - eigen-value problem, homotopy continuation
 
-* Undulatory locomotion on land - periodic solution, homotopy continuation
+* [Undulatory locomotion on land](https://sgangaprasath.github.io/snake.html) - many parameter system, periodic solution, homotopy continuation, adding new boundary boundary conditions
+
+You can find the entire tutorial collection in pdf format [here]({{site.baseurl}}/pubs/autoTutorial.pdf).
 
 ![Tutorial Cover](./figs/cover.jpeg)
