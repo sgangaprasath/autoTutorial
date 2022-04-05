@@ -20,16 +20,16 @@ mu1 = mu1 + run(mu1('UZ3'),DS='-',ICP=[4],UZSTOP={4:0.03})
 mu1 = mu1 + run(mu1('UZ4'),c='Snake.1',e='SnakeFull',DS='-',ICP=[8, 2],UZSTOP={8:1.0e-4})
 
 # Varying Vi and finding Mo
-mu1 = mu1 + run(mu1('UZ5'),c='Snake.1',e='SnakeFull',ICP=[4, 2],UZSTOP={4:1.0e-1})
-mu1 = mu1 + run(mu1('UZ5'),c='Snake.1',e='SnakeFull',DS='-',ICP=[4, 2],UZSTOP={4:0.0e-1})
+mu = run(mu1('UZ5'),c='Snake.1',e='SnakeFull',ICP=[4, 2],UZSTOP={4:1.0e-1})
+mu = mu + run(mu1('UZ5'),c='Snake.1',e='SnakeFull',DS='-',ICP=[4, 2],UZSTOP={4:0.0e-1})
 
 #
 # Relabel solutions
-mu = relabel(mu1)
+mu = relabel(mu)
 # Save to b.mu, s.mu, and d.mu
 save(mu,'mu')
 # Plot bifurcation diagram
-p = plot(mu1)
+p = plot(mu)
 #clean the directory
 #clean()
 wait()
