@@ -40,7 +40,7 @@
        F(5) = kss
        F(6) = (-Pr*sin(th) + Mo*sin(2*PI*s) + k*tn - Be*kss)/Vi - lam*k
        F(7) = muw + mup*Pr*abs(sin(th)) - Mo*cos(2*PI*s)*k/(2*PI) - Be*ks*k - Vi*kss*k - lam*tn
-       F(8)=1.0
+       F(8) = 1.0
 
 
       END SUBROUTINE FUNC
@@ -55,7 +55,7 @@
       DOUBLE PRECISION, INTENT(INOUT) :: U(NDIM),PAR(*)
       DOUBLE PRECISION, INTENT(IN) :: T
 
-       PAR(1)=1.0
+       PAR(1)=0.18
        PAR(2)=0.0
        PAR(3)=0.4
        PAR(4)=1.0
@@ -90,9 +90,9 @@
        FB(4)=U0(3)
        FB(5)=U1(3)
        FB(6)=U0(4)-U1(4)
+       !FB(7)=U0(5)-U1(5)
        FB(7)=U0(7)-U1(7)
        FB(8)=U0(8)
-       !FB(8)=U0(5)-U1(5)
 
       END SUBROUTINE BCND
 !----------------------------------------------------------------------

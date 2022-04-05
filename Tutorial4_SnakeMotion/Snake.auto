@@ -1,5 +1,5 @@
 #=================
-# AUTO eulerNL
+# AUTO Snake
 #=================
 
 Snake = load('Snake')
@@ -8,19 +8,20 @@ Snake = load('Snake')
 mu1 = run(Snake)
 
 # Varying lambda
-mu1 = mu1 + run(mu1('UZ1'),DS='-',ICP=[7],UZSTOP={7:5.0e-3})
-
-# Varying Pr
-mu1 = mu1 + run(mu1('UZ2'),ICP=[1],UZSTOP={1:0.18})
+mu1 = mu1 + run(mu1('UZ1'),DS='-',ICP=[7],UZSTOP={7:1.0e-3})
 
 # Varying muw
-mu1 = mu1 + run(mu1('UZ3'),ICP=[5],UZSTOP={5:0.2})
+mu1 = mu1 + run(mu1('UZ2'),DS='-',ICP=[5],UZSTOP={5:0.2})
 
 # Varying Vi
-mu1 = mu1 + run(mu1('UZ4'),ICP=[4],UZSTOP={4:0.1})
+mu1 = mu1 + run(mu1('UZ3'),DS='-',ICP=[4],UZSTOP={4:0.03})
 
-# Varying boundary theta
-mu1 = mu1 + run(mu1('UZ5'),c='Snake.1',e='SnakeFull',ICP=[8, 2],UZSTOP={8:1.0e-3})
+# Ensuring ks(0)=ks(1)
+mu1 = mu1 + run(mu1('UZ4'),c='Snake.1',e='SnakeFull',DS='-',ICP=[8, 2],UZSTOP={8:1.0e-4})
+
+# Varying Vi and finding Mo
+mu1 = mu1 + run(mu1('UZ5'),c='Snake.1',e='SnakeFull',ICP=[4, 2],UZSTOP={4:1.0e-1})
+mu1 = mu1 + run(mu1('UZ5'),c='Snake.1',e='SnakeFull',DS='-',ICP=[4, 2],UZSTOP={4:0.0e-1})
 
 #
 # Relabel solutions
