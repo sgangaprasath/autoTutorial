@@ -16,6 +16,6 @@ We begin by introducing the framework [here](./autoFw.html). Please click this l
 
 * [Undulatory locomotion on land](https://sgangaprasath.github.io/snake.html) - many parameter system, periodic solution, homotopy continuation, adding new boundary boundary conditions
 
-You can find the entire tutorial collection in pdf format [here]({{site.baseurl}}/pubs/autoTutorial.pdf).
+You can find the entire tutorial collection in pdf format [here](https://sgangaprasath.github.io/pubs/autoTutorial.pdf).
 
 ![Tutorial Cover](./figs/cover.jpeg)
