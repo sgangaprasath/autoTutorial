@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Bending of an elastica</title>
+  <style>
+    html {
+      line-height: 1.7;
+      font-family: Open Sans, Arial, sans-serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin-top: 1.7em;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.7em;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1.7em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1.7em 0 1.7em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      font-style: italic;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      background-color: #f0f0f0;
+      font-size: 85%;
+      margin: 0;
+      padding: .2em .4em;
+    }
+    pre {
+      line-height: 1.5em;
+      padding: 1em;
+      background-color: #f0f0f0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin-top: 1.7em;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+    }
+    th, td {
+      border-bottom: 1px solid lightgray;
+      padding: 1em 3em 1em 0;
+    }
+    header {
+      margin-bottom: 6em;
+      text-align: center;
+    }
+    nav a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="bending-of-an-elastica">Bending of an <em>elastica</em></h1>
+<p>Before we start the tutorial, it might be useful to note that <code>auto-07p</code> codes for all the examples are available in this <a href="https://github.com/sgangaprasath/autoTutorial">link</a>. The first problem we will solve in this tutorial is the deformation of an inextensible slender filament known as the <em>elastica</em>. We solve this in 2-dimensions where the structure can be represented only using curvature information along the filament (captured up to global translations and rotations). The concept of an elastica is very old and dates back to the times of Bernoulli and Euler (read more about it <a href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-103.pdf">here</a>). We consider an elastica hinged at one end while the other end experiences a point force <span class="math inline">\vec{p}= (p_x, p_y)</span>. This problem is described in detail in Prof. Audoly’s <a href="https://catalogue.polytechnique.fr/cours.php?id=2792">lecture notes</a>. The elastic energy under an externally applied point force is <span class="math display">\begin{aligned}
+    \mathcal{E}=&amp; \ \underbrace{\frac{1}{2} \int_0^L B \kappa^2(s) \ \text{d}s}_{\text{Bending energy}} - \underbrace{\int_0^L (p_x \cos \psi + p_y \sin \psi) \ \text{d}s}_{\text{Potential energy}}.\end{aligned}</span> Here <span class="math inline">s</span> is the arc-length and the first term in the above equation is the bending energy term while the next is the work done/stored potential energy due to the applied force. The work done is nothing but <span class="math inline">-\vec{p}.\vec{r}(L)</span> where <span class="math inline">\vec{r}(L)</span> is the end point. The equilibrium equation by extremising this energy or equivalently the Euler-Lagrange equation is <span class="math display">\begin{aligned}
+    B \psi&#39;&#39;(s) - p_x \sin \psi + p_y \cos \psi =&amp; \ 0.\end{aligned}</span> Since we have fixed end on one side, this translates to <span class="math inline">\psi(0) = 0</span> and a torque free boundary at the other side implies <span class="math inline">\kappa(L) = \psi&#39;(L) = 0</span>. This equation can be non-dimensionalized using <span class="math inline">L</span> as the length-scale and <span class="math inline">(B/L)</span> as the energy scale. After non-dimensionalization we get <span class="math inline">\psi&#39;&#39;(s) - p_x \sin \psi + p_y \cos \psi = 0</span>. The rescaled forces are <span class="math inline">\tilde{p}_i = p_i/(BL^2),\ i=x, y</span> (we have dropped the tildes for simplicity).</p>
+<div id="tab:const">
+<table>
+<caption>List of constants in the <code>auto-07p</code> with their description and values based on problem of interest.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Constants</strong></th>
+<th style="text-align: center;"><strong>Description</strong></th>
+<th style="text-align: left;"><strong>Values for elastica</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>ICP</code></td>
+<td style="text-align: left;">Continuation parameters</td>
+<td style="text-align: left;"><span class="math inline">p_x/p_y</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>NPAR</code></td>
+<td style="text-align: left;">Number of parameters</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>IPS</code></td>
+<td style="text-align: left;">Type of problem</td>
+<td style="text-align: left;">4 for boundary value problems</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ISP</code></td>
+<td style="text-align: left;">Switch for bifurcation detection</td>
+<td style="text-align: left;">2 will identify all kinds</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>NBC</code></td>
+<td style="text-align: left;">Number of boundary conditions</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ISW</code></td>
+<td style="text-align: left;">Mode for branch switching</td>
+<td style="text-align: left;">1 for normal, -1 for switching to different</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>UZR</code></td>
+<td style="text-align: left;">User defined points for output</td>
+<td style="text-align: left;"><span class="math inline">p_x/p_y</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>UZSTOP</code></td>
+<td style="text-align: left;">User defined range for parameters</td>
+<td style="text-align: left;"><span class="math inline">p_x \in [-80, 20]</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>NPR</code></td>
+<td style="text-align: left;">Print &amp; save every NPR steps</td>
+<td style="text-align: left;">20</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In order to implement this equation in <code>auto-07p</code> we need to first convert it into a set of first order differential equations. We define <span class="math inline">u_1 = \psi(s), u_2 = \psi&#39;(s)</span> and this results in: <span class="math display">\begin{aligned}
+    u_1&#39; =&amp; \ u_2,\\
+    u_2&#39; =&amp; \ p_x \sin u_1 + p_y \cos u_1.\end{aligned}</span> We know from geometry that <span class="math inline">x&#39;(s) = \cos \psi(s), y&#39;(s) = \sin \psi(s)</span>, which can also be combined with the above equations to obtain a set of 4 equations. We supplement it with boundary conditions: <span class="math inline">u_1(0) = u_2(1) = x(0) = y(0) = 0</span>.</p>
+<h2 id="constants-.f90.c-scripts">Constants, <code>*.f90/*.c</code>, Scripts</h2>
+<p>For each problem we are interested in solving in <code>auto-07p</code> , there are at least 3 files required: <span class="math inline">(i)</span> The constant file (which has a filename as c.*) that inform <code>auto-07p</code> of the details of the problem and the numerical details required for the package to prepare the solver. <span class="math inline">(ii)</span> <code>FORTRAN/C</code> file with the governing equations, boundary conditions, integral constraints and the variables that need to be probed from the solution in order to plot them later to understand the solution. <span class="math inline">(iii)</span> The most important file in this set is the <code>python</code> script that runs <code>auto-07p</code> with the specified constants. The script will help us span the phase space and continue along different solution branches.</p>
+<p><img src="./figs/fig2.jpeg" alt="image" /></p>
+<p>In Table. <a href="#tab:const" data-reference-type="ref" data-reference="tab:const">1</a> we note some of the most important constants that we will use in this tutorial set. A very useful cheat-sheet is in the manual under the title “Quick reference” of chapter 10. The <code>fortran</code> code <code>etica.f90</code> has the equations as a set of first order couple differential equations with <span class="math inline">(p_x, p_y)</span> as the parameters to vary (we vary only one in this example). This file also has the initial solution for the specified parameters from which we need to continue in order to identify the bifurcations in the system. This is a subtle detail which needs to be kept in mind which is that you always need to know a solution to start continuation. In most cases, we are always able to find the trivial solution, like here <span class="math inline">\psi(s) = 0, x(s) = s, y(s) = 0</span> for <span class="math inline">p_x=p_y=0</span>. An important thing to note is that the function <code>PVLS</code> has 3 parameters that probe the value of <span class="math inline">\psi(1), x(1), y(1)</span>.</p>
+<div class="sourceCode" id="cb1" data-language="Python" data-caption="Python script to run \texttt and continue solutions along different branches for the elastica problem."><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>etica <span class="op">=</span> load(<span class="st">&#39;etica&#39;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> run(etica)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> mu <span class="op">+</span> run(mu,DS<span class="op">=</span><span class="st">&#39;-&#39;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> mu <span class="op">+</span> run(mu(<span class="st">&#39;BP1&#39;</span>),ISW<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> mu <span class="op">+</span> run(mu(<span class="st">&#39;BP1&#39;</span>),DS<span class="op">=</span><span class="st">&#39;-&#39;</span>,ISW<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> mu <span class="op">+</span> run(mu(<span class="st">&#39;BP2&#39;</span>),ISW<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> mu <span class="op">+</span> run(mu(<span class="st">&#39;BP2&#39;</span>),DS<span class="op">=</span><span class="st">&#39;-&#39;</span>,ISW<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> mu <span class="op">+</span> run(mu(<span class="st">&#39;BP3&#39;</span>),ISW<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> mu <span class="op">+</span> run(mu(<span class="st">&#39;BP3&#39;</span>),DS<span class="op">=</span><span class="st">&#39;-&#39;</span>,ISW<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Relabel solutions</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> relabel(mu)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Save to b.mu, s.mu, and d.mu</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>save(mu,<span class="st">&#39;mu&#39;</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot bifurcation diagram</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> plot(mu)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>p.config(bifurcation_y<span class="op">=</span>[<span class="st">&#39;psi(1)&#39;</span>])</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#clean the directory</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>clean()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>wait()</span></code></pre></div>
+<p>The <code>python</code> script <code>etica.auto</code> runs the code and finds the bifurcation diagram for the specified set of parameters which we describe in detail now. We can run this code after installing <code>auto-07p</code> by simply typing <code>auto etica.auto</code> in the terminal. The first line in the script loads the files (<code>c.etica, etica.f90</code>) and the <code>run</code> command runs it for the specified constants. Since in the initial solution we start is for <span class="math inline">p_x =0</span> and from the constants file we see that <span class="math inline">p_x \in [-80, 20]</span>, running the code continues along the solution branch for <span class="math inline">p_x \in (0, 20]</span>. We see that there are no bifurcations and we can now take a detour and change the direction of continuation by setting <code>DS=’-’</code> which will continue now from <span class="math inline">p_x =20 \rightarrow -80</span>. We find there are 3 bifurcation points that are displayed as <code>BP</code><span class="math inline">i</span>, which stands for Branch Point (other solution types are described in chapter 6 in the manual) and <span class="math inline">i=1,2,3</span> is the index of the branch point. We can now change the solution branch from the original branch, which is the straight configuration of the elastica, to the bent configuration using <code>ISW=-1</code> and continue till <span class="math inline">p_x =-80</span>. We then continue along the negative direction to identify the solution when elastica is bent the opposite direction. We then move to the next branch starting at <code>BP2</code> and perform the same set of actions, similarly for <code>BP3</code>. All the results are then saved and can also be visualized using the plot interface. However we use the results saved in the <code>s.mu</code> to plot the solution. We briefly describe how this works and the implementation is provided in the <a href="https://github.com/sgangaprasath/autoTutorial/blob/main/Tutorial1_Elastica/withoutDefect/plotElastica.ipynb"><code>plotElastica.ipynb</code></a>.</p>
+<p>When we save the results, <code>auto-07p</code> generates 3 files <code>b.mu, s.mu, d.mu</code> corresponding to bifurcation diagram, solution and diagnostics. The bifurcation diagram has information very similar to what is displayed in the terminal when we run the program but with finer resolution depending on the specified parameters. The solution file on the other hand get saved every texttt<span>NPR</span> steps as specified in the constant file. Further the solution file is a single file with all the solutions and thus has a specific format in which it is saved. The initial lines in the file have the parameter values at which the solution is saved followed by the solution itself. We process the bifurcation diagram and the solution using <code>python</code> package <code>pandas</code> which makes it easy to segregate and plot the data.</p>
+<p>I am sharing here the format of the output file taken from this <a href="https://depts.washington.edu/bdecon/workshop2012/f_stability.pdf">link</a>, which has valuable information on how to process the files and will help make sense of the jupyter-notebook I have shared.</p>
+<p><img src="./figs/OutputFile.jpeg" alt="image" /></p>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>main</title>
+  <style>
+    html {
+      line-height: 1.7;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin-top: 1.7em;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.7em;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1.7em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1.7em 0 1.7em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      font-style: italic;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      background-color: #f0f0f0;
+      font-size: 85%;
+      margin: 0;
+      padding: .2em .4em;
+    }
+    pre {
+      line-height: 1.5em;
+      padding: 1em;
+      background-color: #f0f0f0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin-top: 1.7em;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+    }
+    th, td {
+      border-bottom: 1px solid lightgray;
+      padding: 1em 3em 1em 0;
+    }
+    header {
+      margin-bottom: 6em;
+      text-align: center;
+    }
+    nav a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="oscillating-beam">Oscillating beam</h1>
+<p>The small deflection theory capturing the morphology of an elastic beam is given by the Euler-Bernoulli equation which reads as <span class="math display">\[\alpha w_{tt} = - B w_{xxxx} + p.\]</span> Here <span class="math inline">\(w(x)\)</span> is the vertical displacement along the beam’s length, <span class="math inline">\(\alpha\)</span> is the mass per unit length, <span class="math inline">\(B = EI \sim E \xi^4\)</span> is the bending modulus, <span class="math inline">\(E\)</span> the Young’s modulus, <span class="math inline">\(I\)</span> the second moment of area, <span class="math inline">\(\xi\)</span> is the beam thickness and <span class="math inline">\(p\)</span> is the body force per unit length. We can non-dimensionalize the equation with beam length <span class="math inline">\(L\)</span> as the length scale, <span class="math inline">\(T \sim (\alpha L^4/B)^{1/2}\)</span> as the time-scale and <span class="math inline">\(E\)</span> as the stress-scale. Rewriting <span class="math inline">\(x = sL, t = qT, w = hL\)</span>, we can write the non-dimensional equation as <span class="math display">\[h_{qq} = - h_{ssss} + \mathsf{p}.\]</span> Here the non-dimensional body force <span class="math inline">\(\mathsf{p} = (pL^3/B)\)</span>. We are interested in solving this system for the boundary conditions: <span class="math inline">\((i)\)</span> cantilever beam, <span class="math inline">\(h = h_s = 0\)</span> at <span class="math inline">\(s = 0\)</span>, <span class="math inline">\(h_{ss} = h_{sss} = 0\)</span> at <span class="math inline">\(s = 1\)</span>, with <span class="math inline">\({\mathsf{p}}=0\)</span>, <span class="math inline">\((ii)\)</span> unsupported beam, <span class="math inline">\(h_{ss} = h_{sss} = 0\)</span> at <span class="math inline">\(s = 0, 1\)</span> with <span class="math inline">\({\mathsf{p}}=\beta \sin(2\pi s)\)</span>.</p>
+<p>Though <code>auto-07p</code> is capable of solving discretized PDEs, we are interested in solving an eigenvalue problem which is coherent with our requirement to find oscillating solutions to the beam displacement. This can be done by substituting <span class="math inline">\(h(s, q) = \Re [ \hat{h}(s) \text{e}^{i \omega q} ]\)</span> into the above equation, we then get <span class="math display">\[\omega^2 \hat{h}= \hat{h}_{ssss} - \hat{\mathsf{p}}.\]</span> For the cantilever beam we have the frequency of oscillation as the continuation parameter and this eigenvalue problem can be solved with the specified boundary condition in <code>auto-07p</code>. This is shown in the figure attached. The interesting aspect of the second problem of an unsupported beam is that the boundary conditions are all derivatives in <span class="math inline">\(h\)</span> and thus do not provide a unique solution. One often needs to introduce pinning conditions to select form infinite translationally invariant solution. In <code>auto-07p</code> we do this by introducing a body forcing in the governing equation to get <span class="math display">\[\omega^2 \hat{h}= \hat{h}_{ssss} - \hat{\mathsf{p}} + \lambda \hat{h}.\]</span> and start the continuation with <span class="math inline">\(\lambda = 1\)</span> from which point we continue towards <span class="math inline">\(\lambda = 0\)</span>. After we do this, we are free to continue along any direction as the initial solution is pinned and we have found one of the many solutions for <span class="math inline">\(\lambda = 0\)</span>. In the code attached <a href="https://github.com/sgangaprasath/autoTutorial/tree/master/Tutorial3_EB"><code>Tutorial3_EB</code></a>, we can have explored the solution for <span class="math inline">\(\omega = 1\)</span> and continued the solution for different <span class="math inline">\(\beta\)</span>. This technique of continuing along one branch and then shifting to a different branch is called <em>homotopy</em> continuation. The boundary condition is not really physical here and the solution is not interesting either but I chose this condition to illustrate this technique which is super useful in a variety of scenarios.</p>
+<p><img src="./figs/fig4.jpeg" alt="image" /></p>
+</body>
+</html>

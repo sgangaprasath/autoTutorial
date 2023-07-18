@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Buckling of a sheet</title>
+  <style>
+    html {
+      line-height: 1.7;
+      font-family: Open Sans, Arial, sans-serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin-top: 1.7em;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.7em;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1.7em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1.7em 0 1.7em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      font-style: italic;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      background-color: #f0f0f0;
+      font-size: 85%;
+      margin: 0;
+      padding: .2em .4em;
+    }
+    pre {
+      line-height: 1.5em;
+      padding: 1em;
+      background-color: #f0f0f0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin-top: 1.7em;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+    }
+    th, td {
+      border-bottom: 1px solid lightgray;
+      padding: 1em 3em 1em 0;
+    }
+    header {
+      margin-bottom: 6em;
+      text-align: center;
+    }
+    nav a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="buckling-of-a-sheet">Buckling of a sheet</h1>
+<p>Föppl-von Karman equations in 2D captures the buckling of a sheet/strip/beam. The morphology of the sheet is captured using the deformation field along the in-plane direction is <span class="math inline">u(x)</span> and the displacement along the out-of-plane direction is <span class="math inline">w(x)</span>. The governing equations for this deformation field is <span class="math display">\begin{aligned}
+    S (u_{xx} + w_{x} w_{xx}) + f =&amp; \ 0, \\
+    -B w_{xxxx} + S [ w_{x} u_{xx} + \frac{1}{2} w_{xx} (2 u_{x} + 3 w_{x}^2 ) ] + p  =&amp; \ 0.\end{aligned}</span> <span class="math inline">S</span> is the stretching modulus, given by <span class="math inline">S = E \xi</span> and <span class="math inline">B</span> the bending modulus is <span class="math inline">E I</span> where <span class="math inline">I</span> is the second moment of inertial of the organism, where <span class="math inline">\xi</span> is the thickness of the sheet, <span class="math inline">E</span> the Young’s modulus, <span class="math inline">f</span> and <span class="math inline">p</span> are the external forces per unit length.</p>
+<p><img src="./figs/fig3.jpeg" alt="image" /></p>
+<p>We can non-dimensionalize the force balance equations using the body-length of the organism <span class="math inline">L</span> as the length-scale and <span class="math inline">E</span> the Young’s modulus of the material as the stress-scale. Further we know that <span class="math inline">S \sim E\xi, B \sim E \xi^3</span> and using this we can then write the non-dimensional equations as <span class="math display">\begin{aligned}
+    (d_{ss} + h_{s} h_{ss}) + \mathsf{f}=&amp; \ 0, \\
+    - K h_{ssss} + h_{s} d_{ss} + \frac{1}{2} h_{ss} (2 d_{s} + 3 h_{s}^2) + \mathsf{p} =&amp; \ 0,\end{aligned}</span> where <span class="math inline">x= sL, u = dL, w = hL, K = (\xi/L)^2</span> is the geometric quantity highlighting slenderness, also known as the von Kármán number, <span class="math inline">\mathsf{f}= (fL/E\xi), \mathsf{p} = (p L/E\xi)</span> are the non-dimensional forces. We can solve this system with the following boundary conditions: fixed ends, <span class="math inline">d|_0 = h|_0^1 = 0</span>; zero applied moments, <span class="math inline">h_{ss}|_0^1 = 0</span>; applied tangential strain, <span class="math inline">d_s|_1 = -\alpha</span>. We can again perform a similar analysis to that of the elastica for a fixed value of <span class="math inline">K</span> and changing the applied strain and is shown in the figure below. The code corresponding to these plots is in the <code>1parameter</code> folder inside <a href="https://github.com/sgangaprasath/autoTutorial/tree/main/Tutorial2_FvK"><code>Tutorial2_FvK</code></a>.</p>
+<p>The leverage we have using the <code>.auto</code> script is that we can now steer the solution branch by varying different parameters in the equation. Once you have shifted from the unbuckled configuration to a bucked one using <code>ISW=-1</code> (just as in the elastica case), we can change the continuation parameter to a different one, say <span class="math inline">K</span> just by manipulating the <code>.auto</code> script. We can go further using <code>auto-07p</code> and continue the solution by varying both <span class="math inline">(K, \alpha)</span> by using the variable <code>ICP</code> and setting limits using the <code>UZSTOP</code> command. For example we continue along two variables here by adding an integral constraint. This is because we need to satisfy the constraint <code>NCONT = NBC+NINT-NDIM+1</code> where <code>NCONT</code>-number of continuation parameters, <code>NINT</code>-number of integral constraints, <code>NDIM</code>-number of dimensions. In the current problem we have <code>NBC=6, NDIM=6</code> and thus we need an integral constraint to be able to perform continuation along the two-parameter phase space. After performing this, we get a isocontours in <span class="math inline">(K, \alpha)</span>-plane representing morphologies of the sheet (a sample is shown in the figure below).</p>
+<p><img src="./figs/2param.png" style="width:50.0%" alt="image" /></p>
+</body>
+</html>

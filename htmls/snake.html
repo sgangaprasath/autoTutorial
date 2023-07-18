@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>main</title>
+  <style>
+    html {
+      line-height: 1.7;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin-top: 1.7em;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.7em;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1.7em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1.7em 0 1.7em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      font-style: italic;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      background-color: #f0f0f0;
+      font-size: 85%;
+      margin: 0;
+      padding: .2em .4em;
+    }
+    pre {
+      line-height: 1.5em;
+      padding: 1em;
+      background-color: #f0f0f0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin-top: 1.7em;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+    }
+    th, td {
+      border-bottom: 1px solid lightgray;
+      padding: 1em 3em 1em 0;
+    }
+    header {
+      margin-bottom: 6em;
+      text-align: center;
+    }
+    nav a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="undulatory-propulsion-on-land">Undulatory propulsion on land</h1>
+<p>In this last tutorial, an attempt at coup de grace, we will be combining various techniques we have learnt in this tutorial and apply to the problem of locomotion on land by an active filament aka snake. Solving the problem in <code>auto-07p</code> is challenging as there are several parameters in the system. Further we need to impose periodic boundary conditions, which we have not yet seen in this series. The problem is solved by <a href="https://www.pnas.org/doi/pdf/10.1073/pnas.0705442105">Guo and Maha, PNAS 2007</a> where they describe the shape of a snake based on the body centerline. Please refer to the article for a detailed derivation, the equations read <span class="math display">\[\begin{aligned}
+x_s =&amp; \ \cos \theta, \\
+y_s =&amp; \ \sin \theta, \\
+\theta_s =&amp; \ \kappa, \\
+T_s =&amp; \ \mu_w + \mu_p \text{Pr} | \sin \theta| - \text{Mo} \frac{\cos (2\pi s)}{2\pi} - \text{Be} \kappa_s \kappa - \text{Vi} \kappa_{ss} \kappa, \\
+0 =&amp; \ - \text{Pr} \sin \theta + \text{Mo} \sin(2\pi s) + \kappa T - \text{Be} \kappa_{ss} - \text{Vi} \kappa_{sss}.\end{aligned}\]</span> Here <span class="math inline">\(x, y\)</span> are the position of the centerline, <span class="math inline">\(s\)</span> is the arc-length, <span class="math inline">\(\theta\)</span> is the orientation of the tangent along the body, <span class="math inline">\(\kappa\)</span> is the curvature and <span class="math inline">\(T\)</span> is the tension. There are 6 parameters in the system and they are Pr, Mo, Be, Vi, <span class="math inline">\(\mu_w, \mu_p\)</span>. The boundary conditions that supplement these equations are of two types, dirichlet and periodic. The dirichlet ones are: <span class="math inline">\(x(0) = y(0) = y(1) = \theta(0) = \theta(1) = 0\)</span>, while the periodic ones include: <span class="math inline">\(T(0)=T(1), \kappa(0) = \kappa(1), \kappa_s(0) = \kappa_s(1)\)</span>. As we have seen in our earlier tutorial, <code>NCONT = NBC+NINT-NDIM+1</code>. We have <code>NDIM = 7</code> <code>NBC=8</code>, so we have two continuation parameters. We would like to find Mo vs Vi, just as in the paper.</p>
+<p>In order to do that we split the task into two parts (problem is too hard to solve in one go). The first part is to enforce periodic boundary condition for most but not all the variables (this give confidence in the solution itself), continue from a numerically easily accessible solution to a point close to the actual region of interest. In the second part enforce the last periodic boundary condition that was not supplied earlier. In effect the first part ensure we are continuing along one branch by varying only one parameter and in the second we use homotopy continuation to asymptotically satisfy the last boundary condition. The itemize the steps taken and <code>Snake.auto</code> has the implementation of the method described here.</p>
+<ul>
+<li><p>Initialize: <span class="math inline">\(x(s) = s, y(s) = \theta(s) = \kappa(s) = \kappa_s(s) = \kappa_{ss} = T(s) = 0\)</span>.</p></li>
+<li><p>Choose starting parameters: Pr = 0.18, Mo = 0.0, Be = 0.4, Vi = 1.0, <span class="math inline">\(\mu_w\)</span> = 0.0, <span class="math inline">\(\mu_p\)</span> = 0.2. The starting parameters are close to the one in the Guo and Maha’s paper except for Mo, <span class="math inline">\(\mu_w\)</span> and Vi. These parameter we shall continue to the exact parameters in the paper. I chose these parameters upon some experimentation to see to what extent <code>auto-07p</code> is stable when we start with a trivial guess for snake shape we have chosen.</p></li>
+<li><p>Enforce boundary conditions: <span class="math inline">\(x(0) = y(0) = y(1) = \theta(0) = \theta(1) = 0\)</span> and <span class="math inline">\(T(0)=T(1), \kappa(0) = \kappa(1)\)</span>. We have skipped <span class="math inline">\(\kappa_s(0) = \kappa_s(1)\)</span>, which we shall satisfy using homotopy continuation. As have <code>NBC=7</code>, we can continue only along one parameter. We shall add the additional boundary condition at the end and identify Mo vs Vi.</p></li>
+<li><p>We pin the solution by the same technique we discussed earlier by defining a new parameter <span class="math inline">\(\lambda\)</span> and set it to 1 initially which we will continue to 0 later. The equations them become: <span class="math display">\[\begin{aligned}
+T_s =&amp; \ \mu_w + \mu_p \text{Pr} | \sin \theta| - \text{Mo} \frac{\cos (2\pi s)}{2\pi} - \text{Be} \kappa_s \kappa - \text{Vi} \kappa_{ss} \kappa - \lambda T, \\
+0 =&amp; \ - \text{Pr} \sin \theta + \text{Mo} \sin(2\pi s) + \kappa T - \text{Be} \kappa_{ss} - \text{Vi} \kappa_{sss} - \lambda \kappa.\end{aligned}\]</span> This is done because the periodic boundary condition provides only translationally invariant solutions.</p></li>
+<li><p>We start the continuation by varying Mo which has the body force and see that the shape of the snake change as we increase the amplitude.</p></li>
+<li><p>We then continue from Mo = 100 by varying <span class="math inline">\(\lambda \rightarrow 0\)</span>.</p></li>
+<li><p>We then vary <span class="math inline">\(\mu_w\)</span>, followed by varying Vi i.e. <span class="math inline">\(\mu_w = 0.1\)</span>, Vi = 0.03 to the actual parameters in the paper.</p></li>
+<li><p>The most important step and really the crux of this tutorial is now to enforce the new boundary condition <span class="math inline">\(\kappa_s(0) = \kappa_s(1)\)</span>. This is done by having a new equations file (we call <code>SnakeFull.f90</code>) with the additional boundary condition added but with an additional parameter: <span class="math inline">\(\kappa_s(0) - \kappa_s(1) + \texttt{PAR(8)} = 0\)</span>. When <span class="math inline">\(\texttt{PAR(8)} \rightarrow 0\)</span>, we satisfy the boundary condition exactly. We need to also supply a new constants file with <code>NPAR, NBC</code> updated.</p></li>
+<li><p>We can continue along Vi with Mo as the free parameter once we have satisfied all the boundary conditions and obtain the figure in the article which we show below.</p></li>
+</ul>
+<p><img src="./figs/fig5.jpeg" alt="image" /></p>
+</body>
+</html>
