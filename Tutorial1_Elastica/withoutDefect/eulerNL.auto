@@ -18,7 +18,7 @@ mu = mu + run(mu('BP3'),DS='-',ISW=-1)
 save(mu,'mu')
 # Plot bifurcation diagram
 p = plot(mu)
-p.config(bifurcation_y=['th'])
+p.config(bifurcation_y=['Th(1)'])
 #clean the directory
 clean()
 wait()
